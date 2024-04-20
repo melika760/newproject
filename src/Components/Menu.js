@@ -16,8 +16,8 @@ const dummydata=[
 }
 ];
 const Menu=()=>{
- console.log(dummydata)
 if(dummydata.Category==="Breakfast"){
+    console.log(dummydata.title)
     return(
         <div>
             <h2>Breakfast</h2>
