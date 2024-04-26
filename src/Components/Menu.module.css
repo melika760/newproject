@@ -1,0 +1,27 @@
+.wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+.wrap > div {
+    width: 50%;
+    box-sizing: border-box; 
+  }
+.title{
+    text-align: center;
+    text-decoration: underline;
+    font-family: 'Playball', cursive;
+   font-weight: bold;
+   font-size: 36px;
+}
+.extra{
+    text-align: center;
+}
+@media(max-width:1024px){
+.wrap{
+    display: block;
+}
+.wrap > div {
+    width: 100%;
+    box-sizing: border-box; 
+  }
+}

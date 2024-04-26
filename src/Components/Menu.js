@@ -1,30 +1,39 @@
 import MenuItems from "./MenuItems";
-const dummydata=[
-{
-    Category:"Breakfast",
-    title:"Full English",
-    description:"2 Free Range Eggs,Cumberland Sausage,2 A1 Bacons,Grilled Tomato,Baked Beans,Mushroom and Toast",
-    price:10.95,
-    id:"B1"
-},
-{
-    Category:"Breakfast",
-    title:"Dominique's Special",
-    description:"2 Free Range Eggs, 2 Sausages, 2 A1 Bacons and a Pieces of Toast",
-    price:9.95,
-    id:"B2"
-}
-];
+import styles from "./Menu.module.css"
+import { dummydata } from "../Store/MenuData";
 const Menu=()=>{
-if(dummydata.Category==="Breakfast"){
-    console.log(dummydata.title)
-    return(
+    const groupedItems = dummydata.reduce((acc, item) => {
+        if (!acc[item.Category]) {
+          acc[item.Category] = [];
+        }
+        acc[item.Category].push(item);
+        return acc;
+      }, {});
+    
+      return (
         <div>
-            <h2>Breakfast</h2>
-            {dummydata.map(items=>(<MenuItems title={items.title} description={items.description} price={items.price}/>))}
+          {Object.entries(groupedItems).map(([category, items]) => (
+            <div key={category} className={styles.all}>
+              <h2 className={styles.title} id={category}>{category}</h2>
+              {category==="Pasta" && <p className={styles.extra}>All pasta dishes can be served either Spaghetti or Penne</p>}
+              {category==="Salads" && <p className={styles.extra}>All Served with Pita Bread</p>}
+            <div className={styles.wrap}> {items.map((item) => (
+                <MenuItems
+                  Category={item.Category}
+                  title={item.title}
+                  description={item.description}
+                  price={item.price}
+                  key={item.id}
+                  id={item.id}
+                  prices={item.prices}
+                  subCategory={item.subCategory}
+                />
+              ))}</div>
+              {/* btn */}
+            </div>
+          ))}
         </div>
-    )
-
-}
+        
+      );
 }
 export default Menu;
